@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/brunohbrito/JPProject.IdentityServer4.SSO</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>identity identityserver4 oauth2 jpproject</PackageTags>
-    <NeutralLanguage>English</NeutralLanguage>
+    <!--<NeutralLanguage>English</NeutralLanguage>-->
   </PropertyGroup>
 
   <ItemGroup>

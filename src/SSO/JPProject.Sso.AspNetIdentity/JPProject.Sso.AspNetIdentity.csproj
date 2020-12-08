@@ -16,7 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="MultiTenancyServer" Version="2.0.0-beta2" />
+    <PackageReference Include="MultiTenancyServer.EntityFrameworkCore" Version="2.0.0-beta2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\JPProject.EntityFrameworkCore\JPProject.EntityFrameworkCore.csproj" />
