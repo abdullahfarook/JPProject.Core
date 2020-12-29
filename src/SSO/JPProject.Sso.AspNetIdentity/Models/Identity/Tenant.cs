@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using MultiTenancyServer;
 
 namespace JPProject.Sso.AspNetIdentity.Models.Identity
@@ -11,6 +12,11 @@ namespace JPProject.Sso.AspNetIdentity.Models.Identity
             base.CanonicalName = name;
             DisplayName = displayName;
             Logo = logo;
+        }
+        public Tenant(Guid id, string name)
+        {
+            base.CanonicalName = name;
+            Id = id.ToString();
         }
         public string DisplayName { get; set; } = null!;
         public string? Logo { get; set; }

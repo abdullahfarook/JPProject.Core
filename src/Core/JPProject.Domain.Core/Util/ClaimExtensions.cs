@@ -6,6 +6,7 @@ namespace JPProject.Domain.Core.Util
 {
     public static class ClaimExtensions
     {
+        public static string ProfileInComplete = "profileIncomplete";
         public static string ValueOf(this IEnumerable<Claim> claims, params string[] claimType)
         {
             foreach (var claim in claimType)
