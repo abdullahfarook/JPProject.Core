@@ -13,5 +13,8 @@ namespace JPProject.Sso.AspNetIdentity.Models.Identity
             UserId = user.Id;
         }
         public string TenantId { get; set; }
+        public Tenant Tenant { get; set; }
+        public UserIdentity User { get; set; }
+        public RoleIdentity Role { get; set; }
     }
 }
