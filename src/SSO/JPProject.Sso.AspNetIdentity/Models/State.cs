@@ -8,6 +8,7 @@ namespace JPProject.Sso.AspNetIdentity.Models
 {
     public enum States
     {
+        Undefined = 0,
         Active = 1,
         Inactive = 2,
         InProgress = 3,

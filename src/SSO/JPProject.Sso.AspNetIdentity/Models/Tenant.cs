@@ -1,7 +1,12 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Bk.Common.Exceptions;
+using Bk.Common.LinqUtils;
+using Bk.Common.Roles;
 using JPProject.Sso.AspNetIdentity.Models.Identity;
+using Microsoft.EntityFrameworkCore.Internal;
 using MultiTenancyServer;
 
 namespace JPProject.Sso.AspNetIdentity.Models
@@ -56,7 +61,7 @@ namespace JPProject.Sso.AspNetIdentity.Models
         public string? CreatedById { get; set; }
         public DateTime UpdatedOn { get; set; }
         public string? UpdatedById { get; set; }
-        public List<UserRoleIdentity> UserRoles { get; protected set; } = new List<UserRoleIdentity>();
+        public virtual List<UserRoleIdentity> UserRoles { get; protected set; } = new List<UserRoleIdentity>();
 
         public void UpdateLogo(string logo)
         {
@@ -77,6 +82,7 @@ namespace JPProject.Sso.AspNetIdentity.Models
 
         public void Restore()
             => State = States.Active;
+        
     }
     public enum TenantTypes
     {
