@@ -5,6 +5,7 @@ using System.Linq;
 using Bk.Common.Exceptions;
 using Bk.Common.LinqUtils;
 using Bk.Common.Roles;
+using Bk.Common.StringUtils;
 using JPProject.Sso.AspNetIdentity.Models.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
 using MultiTenancyServer;
@@ -13,8 +14,27 @@ namespace JPProject.Sso.AspNetIdentity.Models
 {
     public class Tenant : TenancyTenant
     {
-        protected Tenant(){}
-        public Tenant(string name,string displayName, string country, string currency, TenantTypes tenanTypeId, Industries industryId, string? logo = null)
+        public string DisplayName { get; set; } = null!;
+        public string? Logo { get; set; }
+        public string? Email { get; protected set; }
+        public string? Phone { get; protected set; }
+        public string? Fax { get; protected set; }
+        public string? Mobile { get; protected set; }
+        public string? TollFree { get; protected set; }
+        public string? Website { get; protected set; }
+        public string Country { get; private set; }
+        public string Currency { get; private set; }
+        public TenantTypes TenantTypeId { get; private set; }
+        public Industries IndustryId { get; private set; }
+        public States State { get; protected set; }
+        public DateTime CreatedOn { get; set; }
+        public string? CreatedById { get; set; }
+        public DateTime UpdatedOn { get; set; }
+        public string? UpdatedById { get; set; }
+        public string? MicrosoftTenantId { get; set; }
+        public virtual List<UserRoleIdentity> UserRoles { get; protected set; } = new List<UserRoleIdentity>();
+        protected Tenant() { }
+        public Tenant(string name, string displayName, string country, string currency, string? providerTenantId = null, TenantTypes tenantTypeId = TenantTypes.GENERIC, Industries industryId = Industries.SoleProprietorShip, string? logo = null)
         {
             base.CanonicalName = name.Trim();
             DisplayName = displayName.Trim();
@@ -23,7 +43,8 @@ namespace JPProject.Sso.AspNetIdentity.Models
             State = States.Active;
             CreatedOn = DateTime.UtcNow;
             UpdatedOn = DateTime.UtcNow;
-            TenantTypeId = tenanTypeId;
+            if (!providerTenantId.IsNullOrEmpty()) MicrosoftTenantId = providerTenantId;
+            TenantTypeId = tenantTypeId;
             IndustryId = industryId;
             Logo = logo;
         }
@@ -44,25 +65,11 @@ namespace JPProject.Sso.AspNetIdentity.Models
             UpdatedById = owner.Id;
             //UserRoles.Add(new UserRoleIdentity(this,new RoleIdentity("), ));
         }
-        public string DisplayName { get; set; } = null!;
-        public string? Logo { get; set; }
-        public string? Email { get; protected set; }
-        public string? Phone { get; protected set; }
-        public string? Fax { get; protected set; }
-        public string? Mobile { get; protected set; }
-        public string? TollFree { get; protected set; }
-        public string? Website { get; protected set; }
-        public string Country { get; private set; }
-        public string Currency { get; private set; }
-        public TenantTypes TenantTypeId { get; private set; }
-        public Industries IndustryId { get; private set; }
-        public States State { get; protected set; }
-        public DateTime CreatedOn { get; set; }
-        public string? CreatedById { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public string? UpdatedById { get; set; }
-        public virtual List<UserRoleIdentity> UserRoles { get; protected set; } = new List<UserRoleIdentity>();
 
+        public void AddUserRoles(List<UserIdentity> users,RoleIdentity role)
+        {
+            UserRoles.AddRange(users.Select(x=> new UserRoleIdentity(this, role,x)));
+        }
         public void UpdateLogo(string logo)
         {
             Logo = logo;

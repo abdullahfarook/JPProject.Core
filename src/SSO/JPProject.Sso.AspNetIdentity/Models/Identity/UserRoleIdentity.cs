@@ -22,6 +22,7 @@ namespace JPProject.Sso.AspNetIdentity.Models.Identity
             UserId = user.Id;
         }
         public string TenantId { get; set; }
+        public States State { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual UserIdentity User { get; set; }
         public virtual RoleIdentity Role { get; set; }
