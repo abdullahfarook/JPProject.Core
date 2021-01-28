@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace JPProject.Sso.AspNetIdentity.Models.Identity
 {
-    [Table("UserRoles")]
     public class UserRoleIdentity : IdentityUserRole<string>
     {
         public UserRoleIdentity() { }
