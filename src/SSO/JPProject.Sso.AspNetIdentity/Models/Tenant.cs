@@ -68,7 +68,6 @@ namespace JPProject.Sso.AspNetIdentity.Models
 
         public void AddUsersWithRole(List<UserIdentity> users,RoleIdentity role)
         {
-            var dup = users.GroupBy(s => s.Id).Where(g => g.Count() > 1).Select(g => g.Key);
             UserRoles.AddRange(users.Select(x=> new UserRoleIdentity(this, role,x)));
         }
         public void UpdateLogo(string logo)
